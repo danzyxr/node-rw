@@ -6,6 +6,6 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "task": "nodemon file_watch.mjs target.txt"
+    "task": "nodemon 'netwerk/net_watch_service.mjs' target.txt"
   }
 }
