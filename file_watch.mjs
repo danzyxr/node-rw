@@ -7,6 +7,7 @@ const file_name = process.argv[2];
 if (!file_name) {
   throw new Error('No file found in argv');
 }
+
 fs.watch(file_name, (e) => {
   // Arrow fns do not have their own `this`
   // Event (e) sends info as parameter to callback
