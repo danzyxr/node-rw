@@ -6,6 +6,10 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "task": "nodemon 'netwerk/net_watch_service.mjs' target.txt"
+    "task": "",
+    "touch": "watch -n 3 touch target.txt",
+    "watch-service": "nodemon 'netwerk/net_watch_service.mjs' target.txt",
+    "watch-client": "nodemon 'netwerk/net_watch_client.mjs'",
+    "killer": "kill -9 $(lsof -t -i:8080)"
   }
 }
