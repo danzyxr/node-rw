@@ -23,8 +23,7 @@ watch_server.listen(8080, () => {
   console.log('Listening for connections');
 });
 
-// In 3 different terminals
-// 1. nodemon '/netwerk/net_watch_service.mjs' target.txt
-// 2. nodemon '/netwerk/net_watch_client.mjs'
-// (optional, or manally edit target.txt):
+// In 3 different terminals:
+// 1. node 'netwerk/net_watch_service.mjs' target.txt
+// 2. node 'netwerk/net_watch_client.mjs'
 // 3. watch -n 3 touch target.txt

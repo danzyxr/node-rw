@@ -8,8 +8,10 @@
   "scripts": {
     "task": "./watcher.sh",
     "touch": "watch -n 3 touch target.txt",
+    "nc-client": "sleep 1 && nc localhost 8080",
+    "net-watch": "nodemon 'netwerk/net_watch.mjs' target.txt",
     "watch-service": "nodemon 'netwerk/net_watch_service.mjs' target.txt",
     "watch-client": "nodemon 'netwerk/net_watch_client.mjs'",
-    "killer": "kill -9 $(lsof -t -i:8080)"
+    "killer": "kill -15 $(lsof -t -i:8080)"
   }
 }
