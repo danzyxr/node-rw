@@ -1,19 +1,19 @@
 import fs from 'fs';
 import net from 'net';
 
-const filename = process.argv[2];
+const file_name = process.argv[2];
 
-if (!filename) {
-  throw new Error('No filename found');
+if (!file_name) {
+  throw new Error('No file found in argv');
 }
 
-const watch_server = net.createServer((c) => {
-  console.log(`Client connected\n${c}`);
-  c.write(`Watching ${filename}\n`);
-  const watcher = fs.watch(filename, () => {
-    c.write(`File changed: ${new Date()}\n`);
+const watch_server = net.createServer((connection) => {
+  console.log(`Client connected\n${connection}`);
+  connection.write(`Watching ${file_name}\n`);
+  const watcher = fs.watch(file_name, () => {
+    connection.write(`File changed: ${new Date()}\n`);
   });
-  c.on('close', () => {
+  connection.on('close', () => {
     console.log('Disconnecting');
     watcher.close();
   });
@@ -23,7 +23,7 @@ watch_server.listen(8080, () => {
   console.log('Listening for connections');
 });
 
-// In 3 different terminals
-// 1. watch -n 3 touch target.txt
-// 2. nodemon '/netwerk/net_watch.mjs' target.txt
-// 3. nc localhost 8080 (or telnet localhost 8080)
+// In 3 different terminals:
+// 1. node 'netwerk/net_watch.mjs' target.txt
+// 2. nc localhost 8080
+// 3. watch -n 3 touch target.txt
