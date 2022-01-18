@@ -6,7 +6,7 @@ Yes, more `node`. The `r`ight `w`ay (Jim R. Wilson).
 
 ## Problems
 
-Running `net_watch_service` and `net_watch_client.mjs` together:
+Running `net_watch_service.mjs` and `net_watch_client.mjs` together:
 Sometimes this happens:
 
 ```error
