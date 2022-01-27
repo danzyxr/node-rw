@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# Kill 8080
 npm run killer &> /dev/null
 
 tmux \

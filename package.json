@@ -10,8 +10,9 @@
     "touch": "watch -n 3 touch target.txt",
     "nc-client": "sleep 1 && nc localhost 8080",
     "net-watch": "nodemon 'netwerk/net_watch.mjs' target.txt",
-    "watch-service": "nodemon 'netwerk/net_watch_service.mjs' target.txt",
-    "watch-client": "nodemon 'netwerk/net_watch_client.mjs'",
+    "watch-service": "nodemon 'netwerk/watch_service.mjs' target.txt",
+    "watch-client": "nodemon 'netwerk/watch_client.mjs'",
+    "test-json-service": "nodemon 'netwerk/test_json_service.mjs'",
     "killer": "kill -15 $(lsof -t -i:8080)"
   }
 }
