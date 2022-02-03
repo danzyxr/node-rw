@@ -17,6 +17,6 @@ const server = net.createServer((connection) => {
   });
 });
 
-server.listen(8080, function () {
+server.listen(8080, () => {
   console.log('Listening for clients');
 });

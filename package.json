@@ -13,6 +13,7 @@
     "watch-service": "nodemon 'netwerk/watch_service.mjs' target.txt",
     "watch-client": "nodemon 'netwerk/watch_client.mjs'",
     "test-json-service": "nodemon 'netwerk/test_json_service.mjs'",
+    "watch-ldj-client": "nodemon 'netwerk/watch_ldj_client.mjs'",
     "killer": "kill -15 $(lsof -t -i:8080)"
   }
 }
