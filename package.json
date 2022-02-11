@@ -3,6 +3,7 @@
   "devDependencies": {
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
+    "mocha": "^9.2.0",
     "prettier": "^2.4.1"
   },
   "scripts": {
@@ -14,6 +15,7 @@
     "watch-client": "nodemon 'netwerk/watch_client.mjs'",
     "test-json-service": "nodemon 'netwerk/test_json_service.mjs'",
     "watch-ldj-client": "nodemon 'netwerk/watch_ldj_client.mjs'",
-    "killer": "kill -15 $(lsof -t -i:8080)"
+    "killer": "kill -15 $(lsof -t -i:8080)",
+    "test": "mocha"
   }
 }
