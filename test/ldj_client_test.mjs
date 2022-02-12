@@ -20,7 +20,7 @@ describe('LDJClient', () => {
     stream.emit('data', '{"foo":"bar"}\n');
   });
 
-  it('should emit a message event from split data events', (done) => {
+  it('should emit a message event from two split data events', (done) => {
     client.on('message', (message) => {
       assert.deepEqual(message, { foo: 'bar' });
       done();
@@ -29,10 +29,20 @@ describe('LDJClient', () => {
     process.nextTick(() => stream.emit('data', '"bar"}\n'));
   });
 
-  it('should finish within 3.255 seconds', (done) => {
-    setTimeout(done, 2999);
-  }).timeout(3255);
-}).timeout(500);
+  it('should emit a message event from two or more split data events', (done) => {
+    client.on('message', (message) => {
+      assert.deepEqual(message, { foo: 'bar' });
+      done();
+    });
+    for (let char of '{"foo":"bar"}\n') {
+      process.nextTick(() => stream.emit('data', char));
+    }
+  });
+
+  it('should finish within 20 ms', (done) => {
+    setTimeout(done, 0);
+  }).timeout(20);
+});
 
 // Add a unit test for a single message that is split over two (or more) data
 // events from the stream.
