@@ -4,7 +4,7 @@ import net from 'net';
 const file_name = process.argv[2];
 
 if (!file_name) {
-  throw new Error('No file found in argv');
+  throw Error('No file found in argv');
 }
 
 const watch_server = net.createServer((connection) => {
