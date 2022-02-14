@@ -39,7 +39,7 @@ describe('LDJClient', () => {
     }
   });
 
-  it('should throw an error when null is passed to its constructor', (done) => {
+  it('should throw an error when a null value is passed into ldj', (done) => {
     client.on('error', (err) => {
       assert.deepEqual(err, 'null value passed into LDJClient');
       done();
@@ -47,28 +47,20 @@ describe('LDJClient', () => {
     stream.emit('data', null);
   });
 
-  it('should handle potentially non-json formatted data', (done) => {
+  it('should throw an error when non-json data is passed into ldj', (done) => {
     client.on('error', (err) => {
-      assert.deepEqual(err, 'non-json formatted data passed into LDJClient');
+      assert.deepEqual(err, 'non-json data passed into LDJClient');
       done();
     });
     stream.emit('data', '"foo":"bar"\n');
   });
 
+  // it('should handle json containing no newline message boundary', (done) => {});
+
   it('should finish within 20 ms', (done) => {
     setTimeout(done, 0);
   }).timeout(20);
 });
-
-// The LDJClient already handles the case in which a properly formatted JSON
-// string is split over multiple lines. What happens if the incoming data is
-// not a properly formatted JSON string?
-
-// Write a test case that sends a data event that is not JSON. What do you
-// think should happen in this case?
-
-// What happens if the last data event completes a JSON message, but without
-// the trailing newline?
 
 // Write a case where the stream object sends a data event containing JSON
 // but no newline, followed by a close event. A real Stream instance will emit
