@@ -39,17 +39,26 @@ describe('LDJClient', () => {
     }
   });
 
+  it('should throw an error when null is passed to its constructor', (done) => {
+    client.on('error', (err) => {
+      assert.deepEqual(err, 'null value passed into LDJClient');
+      done();
+    });
+    stream.emit('data', null);
+  });
+
+  it('should handle potentially non-json formatted data', (done) => {
+    client.on('error', (err) => {
+      assert.deepEqual(err, 'non-json formatted data passed into LDJClient');
+      done();
+    });
+    stream.emit('data', '"foo":"bar"\n');
+  });
+
   it('should finish within 20 ms', (done) => {
     setTimeout(done, 0);
   }).timeout(20);
 });
-
-// Add a unit test for a single message that is split over two (or more) data
-// events from the stream.
-
-// Add a unit test that passes in null to the LDJClient constructor and asserts
-// that an error is thrown. Then make the test pass by modifying the
-// constructor.
 
 // The LDJClient already handles the case in which a properly formatted JSON
 // string is split over multiple lines. What happens if the incoming data is
