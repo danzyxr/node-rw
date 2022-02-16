@@ -1,10 +1,10 @@
 import zmq from 'zeromq';
 
-const socket = new zmq.Subscriber();
-socket.subscribe(''); // Subscribe to all messages
+const subscriber = new zmq.Subscriber();
+subscriber.subscribe(''); // Subscribe to all messages
 
 async function receive_msg() {
-  return await socket.receive();
+  return await subscriber.receive();
 }
 
 receive_msg().then((m) => {
@@ -13,4 +13,4 @@ receive_msg().then((m) => {
   console.log(`File ${message.file} changed at ${date}`);
 });
 
-socket.connect('tcp://localhost:8080');
+subscriber.connect('tcp://localhost:8080');

@@ -7,7 +7,7 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "task": "./watcher.sh",
+    "task": "./zmq_pub_sub.sh",
     "touch": "watch -n 3 touch target.txt",
     "nc-client": "sleep 1 && nc localhost 8080",
     "net-watch": "nodemon 'netwerk/net_watch.mjs' target.txt",

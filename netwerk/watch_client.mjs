@@ -2,8 +2,8 @@ import net from 'net';
 
 const client = net.connect({ port: 8080 });
 
-client.on('data', (recieved) => {
-  const message = JSON.parse(recieved);
+client.on('data', (received) => {
+  const message = JSON.parse(received);
   if (message.type === 'watching') {
     console.log(`Now watching: ${message.file}`);
   } else if (message.type === 'changed') {
