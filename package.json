@@ -17,6 +17,8 @@
     "watch-ldj-client": "nodemon 'netwerk/watch_ldj_client.mjs'",
     "zmq-pub": "nodemon 'services/zmq_watch_pub.mjs' target.txt",
     "zmq-sub": "nodemon 'services/zmq_watch_sub.mjs'",
+    "zmq-rep": "",
+    "zmq-req": "",
     "killer": "kill -15 $(lsof -t -i:8080)",
     "test": "mocha"
   }
