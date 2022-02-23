@@ -12,11 +12,16 @@ receive_reply().then((rep) => {
   console.log('Received reply:', reply);
 });
 
-requester.connect('tcp://localhost:8080');
+requester.connect('tcp://127.0.0.1:8080');
 
 async function send_request() {
-  console.log(`Sending request for ${file_name}`);
-  await requester.send(JSON.stringify({ path: file_name }));
+  for (let i = 0; i < 5; i++) {
+    await requester.send(JSON.stringify({ path: file_name }));
+    console.log(`Sent request for ${file_name}`);
+  }
 }
 
 send_request();
+
+// nodemon services/zmq_filer_request.mjs target.txt
+// Doesn't work with zmq_filer_reply_cluster.mjs
