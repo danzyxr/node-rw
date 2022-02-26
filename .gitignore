@@ -1,2 +1,4 @@
 /.vscode/*
+/data/cache/*
+/data/rdf-files.tar.bz2
 **/node_modules/*
