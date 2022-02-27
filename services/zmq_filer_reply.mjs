@@ -1,31 +1,30 @@
 import fs from 'fs';
 import zmq from 'zeromq';
 
-const responder = new zmq.Reply();
+async function init_responder() {
+  const responder = new zmq.Reply();
+  await responder.bind('tcp://127.0.0.1:8080');
+  console.log('Responder bound to port 8080, listening for requests...');
 
-// async function receive_request() {
-//   return await responder.receive();
-// }
+  for await (const [msg] of responder) {
+    let reply = '';
+    const request = JSON.parse(msg);
+    console.log(`\nReceived request for: ${request.path}\n`);
+    fs.readFile(request.path, (err, data) => {
+      console.log(`err: ${err}`);
+      console.log(`data: ${data}`);
+      reply = JSON.stringify({
+        content: data.toString(),
+        timestamp: Date.now(),
+        pid: process.pid
+      });
+      console.log(`reply: ${reply}`);
+      responder.send(reply);
+    });
+  }
+}
 
-// receive_request().then((req) => {
-//   const request = JSON.parse(req);
-//   console.log(`Received request to get: ${request.path}`);
-//   fs.readFile(request.path, (err, content) => {
-//     responder.send(
-//       JSON.stringify({
-//         content: content.toString(),
-//         timestamp: Date.now(),
-//         pid: process.pid
-//       })
-//     );
-//   });
-// });
-
-console.log('Listening for zmq requests');
-
-responder.bind('tcp://127.0.0.1:8080').catch((err) => {
-  console.log(err);
-});
+init_responder();
 
 // process.on('SIGINT', () => {
 //   console.log('Shutting down...');

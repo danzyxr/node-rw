@@ -1,28 +1,19 @@
 import zmq from 'zeromq';
 
 const file_name = process.argv[2];
-const requester = new zmq.Request();
 
-// async function receive_reply() {
-//   return await requester.receive();
-// }
+async function init_requester() {
+  const requester = new zmq.Request();
+  requester.connect('tcp://127.0.0.1:8080');
+  console.log('Requester connected to 8080');
 
-// for await (const [msg] of requester) {
-//   const reply = JSON.parse(...msg);
-//   console.log('Received reply:', reply);
-// }
-
-// receive_reply().then((rep) => {
-//   const reply = JSON.parse(rep);
-//   console.log('Received reply:', reply);
-// });
-
-requester.connect('tcp://127.0.0.1:8080');
-
-for (let i = 0; i < 5; i++) {
-  await requester.send(JSON.stringify({ path: file_name }));
-  console.log(`Sent request for ${file_name}`);
+  for (let i = 0; i < 5; i++) {
+    await requester.send(JSON.stringify({ path: file_name }));
+    console.log(`Awaiting reply for request: ${file_name}`);
+    const [msg] = await requester.receive();
+    console.log('Received reply:', msg);
+  }
+  console.log('Done!');
 }
 
-// nodemon services/zmq_filer_request.mjs target.txt
-// Doesn't work with zmq_filer_reply_cluster.mjs
+init_requester();
