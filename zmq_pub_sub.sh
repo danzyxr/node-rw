@@ -3,8 +3,5 @@
 npm run killer &> /dev/null
 
 tmux \
-new-session "npm run zmq-pub"\; \
-split-window "npm run zmq-sub"\; \
-
-# gnome-terminal --tab -e "npm run zmq-pub" & \
-# gnome-terminal --tab -e "npm run zmq-sub" & \
+    new-session "nodemon --delay 1000ms services/zmq_watch_pub.mjs target.txt"\; \
+    split-window "nodemon --delay 1000ms services/zmq_watch_sub.mjs"\; \
