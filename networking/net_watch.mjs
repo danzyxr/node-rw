@@ -24,6 +24,6 @@ watch_server.listen(8080, () => {
 });
 
 // In 3 different terminals:
-// 1. node 'netwerk/net_watch.mjs' target.txt
+// 1. node 'networking/net_watch.mjs' target.txt
 // 2. nc localhost 8080
 // 3. watch -n 3 touch target.txt

@@ -3,6 +3,6 @@
 npm run killer &> /dev/null
 
 tmux \
-    new-session "npm run net-watch"\; \
+    new-session "nodemon networking/net_watch.mjs target.txt"\; \
     split-window "npm run nc-client"\; \
     split-window "npm run touch"\; \
