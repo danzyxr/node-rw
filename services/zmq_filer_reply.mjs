@@ -26,7 +26,10 @@ async function init_responder() {
 
 init_responder();
 
-// process.on('SIGINT', () => {
-//   console.log('Shutting down...');
-//   responder.close();
-// });
+process.once('SIGUSR2', () => {
+  process.kill(process.pid, 'SIGUSR2');
+});
+
+process.on('SIGINT', () => {
+  process.kill(process.pid, 'SIGINT');
+});

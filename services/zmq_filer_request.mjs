@@ -11,8 +11,9 @@ async function init_requester() {
     await requester.send(JSON.stringify({ path: file_name }));
     console.log(`Awaiting reply for request: ${file_name}`);
     const [msg] = await requester.receive();
-    console.log('Received reply:', msg);
+    console.log('Received reply:', JSON.parse(msg));
   }
+
   console.log('Done!');
 }
 
