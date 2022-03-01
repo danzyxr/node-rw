@@ -12,18 +12,14 @@ if (cluster.isPrimary) {
   await router.bind('tcp://127.0.0.1:8080');
   await dealer.bind('ipc://filer-dealer.ipc');
 
-  // for await (const [frames] of router) {
-  //   console.log(router, frames);
-  //   dealer.send([frames]);
-  // }
-
-  // for await (const [frames] of dealer) {
-  //   console.log(dealer, frames);
-  //   router.send([frames]);
-  // }
-
-  router.receive().then((...frames) => dealer.send(frames));
-  dealer.receive().then((...frames) => router.send(frames));
+  for await (const [msg] of router) {
+    console.log('a', msg);
+    await dealer.send(msg);
+  }
+  for await (const [msg] of dealer) {
+    console.log('b', msg);
+    await router.send(msg);
+  }
 
   cluster.on('online', (worker) => {
     console.log(`Worker ${worker.process.pid} is now online`);
@@ -33,42 +29,22 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 } else {
-  console.log("I'm a worker");
   const responder = new zmq.Reply();
-  console.log(responder);
-  const [msg] = await responder.receive();
-  console.log(msg, 'logged');
-
-  // for await (const [msg] of responder) {
-  //   const request = JSON.parse(msg);
-  //   console.log(`${process.pid} requesting ${request.path}`);
-  //   fs.readFile(request.path, (err, content) => {
-  //     console.log(`Response sent from ${process.pid}`);
-  //     responder.send(
-  //       JSON.stringify({
-  //         content: content.toString(),
-  //         timestamp: Date.now(),
-  //         pid: process.id
-  //       })
-  //     );
-  //   });
-  // }
-
-  // responder.receive().then((req) => {
-  //   const request = JSON.parse(req);
-  //   console.log(`${process.pid} requesting ${request.path}`);
-  //   fs.readFile(request.path, (err, content) => {
-  //     console.log(`Response sent from ${process.pid}`);
-  //     responder.send(
-  //       JSON.stringify({
-  //         content: content.toString(),
-  //         timestamp: Date.now(),
-  //         pid: process.id
-  //       })
-  //     );
-  //   });
-  // });
+  await responder.bind('ipc://filer-dealer.ipc');
+  console.log('Worker bound to filer-dealer');
+  for await (const [msg] of responder) {
+    console.log('Inside await of reply socket');
+    const request = JSON.parse(msg);
+    console.log(`${process.pid} requesting ${request.path}`);
+    fs.readFile(request.path, (err, data) => {
+      console.log(`Response sent from ${process.pid}`);
+      responder.send(
+        JSON.stringify({
+          content: data.toString(),
+          timestamp: Date.now(),
+          pid: process.id
+        })
+      );
+    });
+  }
 }
-
-// nodemon services/zmq_filer_reply_cluster.mjs
-// Doesn't work with zmq_filer_request.mjs
