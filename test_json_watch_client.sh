@@ -3,5 +3,5 @@
 npm run killer &> /dev/null
 
 tmux \
-new-session "npm run test-json-service"\; \
-split-window "npm run watch-client"\; \
+    new-session "npm run test-json-service"\; \
+    split-window "npm run watch-client"\; \
