@@ -15,6 +15,12 @@
     "touch": "watch -n 3 touch target.txt",
     "nc-client": "sleep 1 && nc localhost 8080",
     "killer": "kill -15 $(lsof -t -i:8080)",
-    "test": "mocha"
+    "test": "mocha networking/test database/test"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/node_modules/**",
+      "**/data/cache/**"
+    ]
   }
 }

@@ -1,5 +1,5 @@
 import net from 'net';
-import LDJClient from '../lib/ldj_client.mjs';
+import LDJClient from './lib/ldj_client.mjs';
 
 const net_client = net.connect({ port: 8080 });
 const ldj_client = LDJClient.connect(net_client);
