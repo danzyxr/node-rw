@@ -1,0 +1,7 @@
+{
+  "diff": true,
+  "package": "./package.json",
+  "extension": ["mjs"],
+  "watch": "false",
+  "watch-ignore": ["**/node_modules/*/**", "**/data/cache/**"]
+}
