@@ -1,3 +1,4 @@
 export default function parse_rdf() {
-  return;
+  const book = {};
+  return book;
 }

@@ -9,7 +9,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rdf = fs.realpathSync(`${__dirname}/pg132.rdf`);
 
 describe('parse_rdf', () => {
-  it('Should be a function', () => {
+  it('should be a function', () => {
     expect(parse_rdf).to.be.a('function');
+  });
+  it('should parse rdf content', () => {
+    const book = parse_rdf(rdf);
+    expect(book).to.be.an('object');
   });
 });

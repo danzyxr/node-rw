@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
     "zeromq": "^6.0.0-beta.6"
   },
   "devDependencies": {
@@ -15,7 +16,9 @@
     "touch": "watch -n 3 touch target.txt",
     "nc-client": "sleep 1 && nc localhost 8080",
     "killer": "kill -15 $(lsof -t -i:8080)",
-    "test": "mocha networking/test database/test"
+    "test": "mocha networking/test database/test",
+    "test:watch": "mocha --watch --reporter min networking/test database/test",
+    "test:min": "mocha --reporter min networking/test database/test"
   },
   "nodemonConfig": {
     "ignore": [
