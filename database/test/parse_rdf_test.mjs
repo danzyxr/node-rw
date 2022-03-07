@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import parse_rdf from '../lib/parse_rdf.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const rdf = fs.realpathSync(`${__dirname}/pg132.rdf`);
+const rdf = fs.readFileSync(`${__dirname}/pg132.rdf`);
 
 describe('parse_rdf', () => {
   it('should be a function', () => {
