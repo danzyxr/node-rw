@@ -1,6 +1,7 @@
-# node-rw
+# ntdd
 
-Yes, more `node`. The `r`ight `w`ay (Jim R. Wilson).
+References:
+<https://pragprog.com/titles/jwnode2/node-js-8-the-right-way/>
 
 ---
 

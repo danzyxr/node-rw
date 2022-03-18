@@ -1,11 +1,11 @@
 {
   "env": {
-    "esnext": true,
     "node": true
   },
   "extends": ["prettier"],
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   },
   "rules": {
     "no-undef": 2,
