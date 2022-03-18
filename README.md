@@ -40,3 +40,28 @@ Solution:
 
 - rewrite tests using common.js, or
 - write a fs watcher in node to run mocha tests
+
+```error
+node:events:498
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at process.target._send (node:internal/child_process:866:20)
+    at process.target.send (node:internal/child_process:739:19)
+    at sendHelper (node:internal/cluster/utils:28:15)
+    at send (node:internal/cluster/child:216:10)
+    at EventEmitter.cluster._setupWorker (node:internal/cluster/child:51:3)
+    at initializeClusterIPC (node:internal/bootstrap/pre_execution:350:13)
+    at prepareMainThreadExecution (node:internal/bootstrap/pre_execution:67:3)
+    at node:internal/main/run_main_module:7:1
+Emitted 'error' event on Worker instance at:
+    at process.<anonymous> (node:internal/cluster/worker:30:12)
+    at process.emit (node:events:520:28)
+    at node:internal/child_process:870:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}
+```
