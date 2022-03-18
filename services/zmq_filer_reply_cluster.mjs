@@ -28,22 +28,24 @@ if (cluster.isPrimary) {
     }
   }
 
-  bind_sockets();
-  await_router();
-  await_dealer();
+  await bind_sockets();
 
   cluster.on('online', (worker) => {
     console.log(`Worker ${worker.process.pid} is now online`);
   });
 
+  console.log(`Forking ${num_of_workers} clusters`);
+
   for (let i = 0; i < num_of_workers; i++) {
     cluster.fork();
   }
+
+  await await_router();
+  await await_dealer();
 } else {
   async function run_cluster() {
     const responder = new zmq.Reply();
     await responder.bind('ipc://filer-dealer.ipc');
-    console.log('Worker bound to filer-dealer');
     for await (const [msg] of responder) {
       console.log('Inside await of reply socket');
       const request = JSON.parse(msg);
