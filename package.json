@@ -2,6 +2,7 @@
   "type": "module",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
+    "node-dir": "^0.1.17",
     "zeromq": "^6.0.0-beta.6"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { describe } from 'mocha';
+import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import parse_rdf from '../lib/parse_rdf.mjs';
 
