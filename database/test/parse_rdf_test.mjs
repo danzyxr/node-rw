@@ -1,12 +1,17 @@
-import fs from 'fs';
 import { dirname } from 'path';
+import { readFileSync } from 'fs';
+import parse_rdf from '../lib/parse_rdf.mjs';
 import { fileURLToPath } from 'url';
+import { waitForDebugger } from 'inspector';
+
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import parse_rdf from '../lib/parse_rdf.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const rdf = fs.readFileSync(`${__dirname}/pg132.rdf`);
+const rdf = readFileSync(`${__dirname}/pg132.rdf`);
+
+waitForDebugger();
+debugger;
 
 describe('parse_rdf', () => {
   it('should be a function', () => {

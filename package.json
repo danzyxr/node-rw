@@ -12,14 +12,17 @@
     "mocha": "^9.2.2",
     "prettier": "^2.6.0"
   },
+  "config": {
+    "dir": "networking/test database/test"
+  },
   "scripts": {
     "task": "./bin/zmq_pub_sub.sh",
     "touch": "watch -n 3 touch target.txt",
     "nc-client": "sleep 1 && nc localhost 8080",
     "killer": "kill -15 $(lsof -t -i:8080)",
-    "test": "mocha networking/test database/test",
-    "test:watch": "mocha --watch --reporter min networking/test database/test",
-    "test:min": "mocha --reporter min networking/test database/test"
+    "test": "mocha $npm_package_config_dir",
+    "test:watch": "nodemon --exec 'mocha --reporter min $npm_package_config_dir'",
+    "test:dbg": "node --inspect node_modules/mocha/bin/_mocha --no-timeouts $npm_package_config_dir"
   },
   "nodemonConfig": {
     "ignore": [
