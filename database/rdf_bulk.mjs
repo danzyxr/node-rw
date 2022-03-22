@@ -15,3 +15,10 @@ dir.readFiles(directory, options, (err, content, next) => {
   console.log(JSON.stringify(parsed_document));
   next();
 });
+
+process.stdout.on("error", err => {
+  if (err.code === 'EPIPE') {
+    process.exit()
+  }
+  throw err;
+})
