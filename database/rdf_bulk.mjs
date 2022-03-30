@@ -16,9 +16,9 @@ dir.readFiles(directory, options, (err, content, next) => {
   next();
 });
 
-process.stdout.on("error", err => {
+process.stdout.on('error', (err) => {
   if (err.code === 'EPIPE') {
-    process.exit()
+    process.exit();
   }
   throw err;
-})
+});
