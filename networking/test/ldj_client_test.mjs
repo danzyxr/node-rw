@@ -34,7 +34,7 @@ describe('LDJClient', () => {
       assert.deepEqual(message, { foo: 'bar' });
       done();
     });
-    for (let char of '{"foo":"bar"}\n') {
+    for (const char of '{"foo":"bar"}\n') {
       process.nextTick(() => stream.emit('data', char));
     }
   });

@@ -5,20 +5,21 @@ References:
 
 ---
 
+## Using Docker-ELK
+
+Exposed ports:
+
+5044:  Logstash Beats input
+50000: Logstash TCP input
+9600:  Logstash monitoring API
+9200:  Elasticsearch HTTP
+9300:  Elasticsearch TCP transport
+5601:  Kibana
+
 ## Problems
 
-Running `net_watch_service.mjs` and `net_watch_client.mjs` together:
-
-```error
-SyntaxError: Unexpected token { in JSON at position 44
-    at JSON.parse (<anonymous>)
-    at Socket.<anonymous> (file:///home/dan/Documents/node-rw/networking/net_watch_client.mjs:6:24)
-    at Socket.emit (node:events:390:28)
-    at addChunk (node:internal/streams/readable:315:12)
-    at readableAddChunk (node:internal/streams/readable:289:9)
-    at Socket.Readable.push (node:internal/streams/readable:228:10)
-    at TCP.onStreamRead (node:internal/stream_base_commons:199:23)
-```
+Plenty of problems trying to get Docker, Elasticsearch, Kibana, etc. working in
+the first place, but I found [this](https://github.com/deviantony/docker-elk) template.
 
 When running `mocha --watch`:  
 
@@ -35,10 +36,5 @@ Instead change the require of /home/dan/d/node-rw/networking/test/ldj_client_tes
 
 <https://github.com/mochajs/mocha/issues/4625>  
 <https://github.com/standard-things/esm/issues/868>
-
-Solution:
-
-- rewrite tests using common.js, or
-- write a fs watcher in node to run mocha tests
 
 `./database/rdf_json.mjs ./data/cache/epub/11/pg11.rdf`

@@ -22,8 +22,8 @@ function get_mjs_files(directory) {
   return files_list;
 }
 
-let mjs = get_mjs_files('.');
+const mjs = get_mjs_files('.');
 
-for (let each of mjs) {
+for (const each of mjs) {
   console.log(each);
 }
